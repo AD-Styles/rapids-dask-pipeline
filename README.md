@@ -53,17 +53,28 @@
 | **Reduce Operation** | 분산된 결과를 하나로 취합하는 동기화 단계 (Aggregate) | `sum()`, `mean()`, `max()` 등의 집계 연산 |
 | **Partitions** | 대규모 데이터를 작은 단위로 쪼개어 개별 GPU/Worker에 할당 | 메모리 효율 극대화 및 병렬 로딩 최적화 |
 
-**📌 MapReduce DAG 시각화 (4 Partitions)**
-Dask의 지연 평가(Lazy Evaluation)를 통해 구성된 병렬 처리 파이프라인의 작업 흐름도입니다.
+---
+
+## 📌 시각화로 이해하는 병렬 처리와 깨달음 (Insights through Visualization)**
+
+### 1. MapReduce DAG 분석
+Dask의 지연 평가(Lazy Evaluation) 기능을 통해 생성된 작업 흐름도(DAG)입니다. 4개의 파티션이 동시에 연산되는 과정을 한눈에 볼 수 있습니다.
+
 ![MapReduce DAG Visualization](images/mapreduce_dag.png)
 
-### 4. 확장 개념 (Advanced Terminology)
-| 개념 | 설명 | 관련 도구 |
-| :--- | :--- | :--- |
-| **CRUD** | 데이터베이스 및 스토리지의 기본 작업 (Create, Read, Update, Delete) | Relational Databases 연동 |
-| **NVTabular** | 추천 시스템 등을 위한 대규모 정형 데이터 가공 가속 라이브러리 | Deep Learning Pipeline |
-| **Plotly Dash** | 분석 결과를 실시간 대시보드로 시각화하는 인터랙티브 프레임워크 | Data Visualization |
-| **VRAM Warm-up** | cuDF 초기화 시 발생하는 오버헤드를 줄이기 위한 사전 실행 전략 | Performance Optimization |
+| 단계 (Step) | 시각화 노드 | 대학생의 시선으로 본 핵심 포인트 🚀 |
+| :--- | :---: | :--- |
+| **Data Loading** | 맨 아래 사각형 | 데이터를 4개의 '도시락'처럼 나누어 담는 과정입니다. |
+| **Map Step** | `add` 원형 | 각 도시락마다 반찬(`+10`)을 동시에 넣는 과정입니다. 서로 기다릴 필요가 없어 아주 빠릅니다! |
+| **Reduce Step** | `sum-tree` 원형 | 각자 만든 반찬들을 한곳에 모아 비빔밥(`Total Sum`)을 만드는 과정입니다. 이때는 소통이 필요합니다. |
+
+
+### 2. 프로젝트를 통해 얻은 '진짜' 인사이트 (Key Lessons)
+
+* **VRAM Warm-up의 발견:** 처음에 cuDF로 파일을 읽을 때 생각보다 느려서 당황했지만 두 번째 실행부터는 속도가 비약적으로 빨라지는 것을 보고, GPU 라이브러리 초기화에 필요한 **'Warm-up'** 시간의 존재를 몸소 깨달았습니다.
+* **그릇(포맷)의 중요성:** 똑같은 데이터라도 CSV보다 Parquet 형식이 훨씬 가볍고 빠르다는 점이 인상적이었습니다. 모델링 기법을 고민하기 전에, 데이터를 담는 **'그릇'**부터 최적화하는 것이 엔지니어링의 시작임을 배웠습니다.
+* **효율적인 기다림, Lazy Evaluation:** 코드를 쓰자마자 실행되는 게 아니라, 전체적인 '계획(DAG)'을 먼저 세우고 마지막에 몰아서 처리하는 방식이 대규모 데이터 처리에서 얼마나 큰 효율을 주는지 이해하게 되었습니다.
+
 
 ---
 
