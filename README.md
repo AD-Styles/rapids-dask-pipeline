@@ -14,16 +14,16 @@
 
 ## 📂 프로젝트 구조 (Project Structure)
 ```text
-📂 data-pipelines
+📂 images/                           
+    └── mapreduce_dag.png               # MapReduce DAG 시각화 결과물
+📂 src/                                 
+    └── 1_benchmark_io.py               # I/O 효율성 분석: JSON, CSV, Parquet 성능 비교 스크립트
+    └── 2_dask_mapreduce.py             # 분산 병렬 처리: Dask & MapReduce 파이프라인 스크립트
+    └── 3_generate_mapreduce_dag.py     # Dask DAG 시각화 이미지 생성 스크립트
 ├── .gitignore                      # GitHub 업로드 제외 데이터 및 캐시 설정
-├── 1_benchmark_io.py               # I/O 효율성 분석: JSON, CSV, Parquet 성능 비교 스크립트
-├── 2_dask_mapreduce.py             # 분산 병렬 처리: Dask & MapReduce 파이프라인 스크립트
-├── 3_generate_mapreduce_dag.py     # Dask DAG 시각화 이미지 생성 스크립트
 ├── LICENSE                         # MIT License (AD-Styles)
 ├── README.md                       # 프로젝트 핵심 요약 및 설명서
-├── requirements.txt                # 프로젝트 실행에 필요한 파이썬 패키지 목록
-└── images/                         # 시스템 아키텍처 및 시각화 이미지 폴더
-    └── mapreduce_dag.png           # MapReduce DAG 시각화 결과물
+└── requirements.txt                # 프로젝트 실행에 필요한 파이썬 패키지 목록 
 ```
 
 ---
