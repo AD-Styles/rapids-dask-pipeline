@@ -34,15 +34,15 @@
 | :--- | :--- | :--- | :--- |
 | **연산 가속** | CPU (Single-core / Multi-thread) | GPU (NVIDIA CUDA Cores) | Multi-node / Multi-GPU Distributed |
 | **메모리 관리** | System RAM | GPU VRAM (Apache Arrow) | Distributed Memory Management |
-| **평가 방식** | 즉시 실행 (Eager Evaluation) | 즉시 실행 (Eager Evaluation) | [cite_start]지연 평가 (Lazy Evaluation / DAG) [cite: 2] |
-| **최적 사례** | 소규모 데이터 및 복잡한 로직 | 단일 GPU 메모리 내 대용량 연산 | 멀티 파일/TB급 대규모 데이터 분산 처리 |
+| **평가 방식** | 즉시 실행 (Eager Evaluation) | 즉시 실행 (Eager Evaluation) | 지연 평가 (Lazy Evaluation / DAG) |
+| **최적 사례** | 소규모 데이터 및 복잡한 로직 | 단일 GPU 메모리 내 대용량 연산 | 멀티 파일/TB급 대규모 데이터 분산처리 |
 
 ### 2. 데이터 포맷 및 저장 구조 분석 (Data Architecture)
 | 포맷 | 저장 방식 | 특징 및 오버헤드 | 최적의 유즈케이스 |
 | :--- | :--- | :--- | :--- |
-| **CSV** | Row-based (Text) | [cite_start]인간 가독성은 높으나, 특정 열 로드 시 전체 행을 읽는 I/O 병목 발생 [cite: 4, 7] | 소규모 데이터 교환, 초기 탐색 |
-| **JSON** | Semi-structured | [cite_start]유연한 스키마를 제공하나 필드 이름 중복으로 인해 저장 공간 낭비 심함 [cite: 4, 5] | Web API 통신, 비정형 데이터 적재 |
-| **Parquet** | Columnar-based | 스키마 메타데이터 및 압축 기술 활용. [cite_start]필요한 열만 선택적으로 로드 가능 [cite: 4] | 분석용 데이터 웨어하우스, GPU I/O 최적화 |
+| **CSV** | Row-based (Text) | 인간 가독성은 높으나, 특정 열 로드 시 전체 행을 읽는 I/O 병목 발생 | 소규모 데이터 교환, 초기 탐색 |
+| **JSON** | Semi-structured | 유연한 스키마를 제공하나 필드 이름 중복으로 인해 저장 공간 낭비 심함 | Web API 통신, 비정형 데이터 적재 |
+| **Parquet** | Columnar-based | 스키마 메타데이터 및 압축 기술을 활용하여 필요한 열만 선택적으로 로드 가능 | 분석용 데이터 웨어하우스, GPU I/O 최적화 |
 
 ### 3. 분산 컴퓨팅 전략 (Parallel Processing Strategy)
 | 아키텍처 | 설명 | 세부 기술 요소 |
@@ -55,7 +55,7 @@
 ### 4. 확장 개념 (Advanced Terminology)
 | 개념 | 설명 | 관련 도구 |
 | :--- | :--- | :--- |
-| **CRUD** | [cite_start]데이터베이스 및 스토리지의 기본 작업 (Create, Read, Update, Delete) [cite: 1] | Relational Databases 연동 |
-| **NVTabular** | [cite_start]추천 시스템 등을 위한 대규모 정형 데이터 가공 가속 라이브러리 [cite: 1] | Deep Learning Pipeline |
-| **Plotly Dash** | [cite_start]분석 결과를 실시간 대시보드로 시각화하는 인터랙티브 프레임워크 [cite: 1] | Data Visualization |
-| [cite_start]**VRAM Warm-up** | cuDF 초기화 시 발생하는 오버헤드를 줄이기 위한 사전 실행 전략 [cite: 6] | Performance Optimization |
+| **CRUD** | 데이터베이스 및 스토리지의 기본 작업 (Create, Read, Update, Delete) | Relational Databases 연동 |
+| **NVTabular** | 추천 시스템 등을 위한 대규모 정형 데이터 가공 가속 라이브러리 | Deep Learning Pipeline |
+| **Plotly Dash** | 분석 결과를 실시간 대시보드로 시각화하는 인터랙티브 프레임워크 | Data Visualization |
+| **VRAM Warm-up** | cuDF 초기화 시 발생하는 오버헤드를 줄이기 위한 사전 실행 전략 | Performance Optimization |
