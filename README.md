@@ -1,6 +1,32 @@
-## 🚀 Technical Deep Dive: GPU-Accelerated Data Engineering
+## 🚀 Accelerating Data Engineering Pipelines with RAPIDS & Dask
 
-본 프로젝트는 NVIDIA RAPIDS와 Dask를 활용하여 데이터 엔지니어링 파이프라인의 핵심 병목 지점을 최적화하는 과정을 담고 있습니다. 아래는 프로젝트에서 다루는 핵심 기술 개념과 아키텍처 비교 분석입니다.
+![Python](https://img.shields.io/badge/Python-3.7+-3776AB?style=flat-square&logo=python&logoColor=white)
+![NVIDIA](https://img.shields.io/badge/NVIDIA-CUDA-76B900?style=flat-square&logo=nvidia&logoColor=white)
+![RAPIDS](https://img.shields.io/badge/RAPIDS-cuDF-7401F0?style=flat-square&logo=nvidia&logoColor=white)
+![Dask](https://img.shields.io/badge/Dask-Parallel-ORANGE?style=flat-square&logo=dask&logoColor=white)
+
+---
+
+## 📌 프로젝트 요약 (Project Overview)
+본 프로젝트는 GPU 가속 데이터프레임 라이브러리인 **RAPIDS cuDF**와 분산 처리 프레임워크인 **Dask**를 활용하여 데이터 엔지니어링 파이프라인의 병목 현상을 해결하고 성능을 최적화하는 과정을 담고 있습니다. 프로젝트에서 다루는 핵심 기술 개념과 아키텍처 비교 분석을 통하여 입니다.
+
+---
+
+## 📂 Project Structure
+
+[cite_start]본 프로젝트는 데이터 포맷 분석부터 분산 컴퓨팅 아키텍처 설계까지 단계별로 구성되어 있습니다. 
+
+```text
+.
+├── 1_Data_Formats.ipynb          # I/O 효율성 분석: JSON, CSV, Parquet 성능 비교 
+├── 2_Dask_and_MapReduce.ipynb    # 분산 병렬 처리: Dask & MapReduce 파이프라인 구축 
+├── Accelerating_Data_Engineering_Pipelines.pdf # DLI 워크숍 핵심 이론 및 가이드라인 
+├── data/                         # 벤치마킹 및 실습용 데이터셋
+│   ├── sample_json.txt           # NOAA Tides & Currents API 원본 데이터 
+│   ├── sample_data.csv           # 시계열 수위 데이터 (Row-based) 
+│   ├── sample_data.parquet       # 칼럼 기반 최적화 데이터 (Columnar) 
+│   └── numbers.csv/parquet       # 7500x7500 고차원 벤치마킹 데이터셋 
+└── images/                       # 시스템 아키텍처 및 DAG 시각화 이미지
 
 ### 1. 처리 엔진 및 라이브러리 비교 (Engine Comparison)
 | 구분 | Pandas | RAPIDS cuDF | Dask / dask_cudf |
