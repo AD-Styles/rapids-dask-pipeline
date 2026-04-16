@@ -12,21 +12,18 @@
 
 ---
 
-## 📂 Project Structure
-
-[cite_start]본 프로젝트는 데이터 포맷 분석부터 분산 컴퓨팅 아키텍처 설계까지 단계별로 구성되어 있습니다. 
-
+## 📂 프로젝트 구조 (Project Structure)
 ```text
-.
+📂 data-pipelines
 ├── 1_Data_Formats.ipynb          # I/O 효율성 분석: JSON, CSV, Parquet 성능 비교 
 ├── 2_Dask_and_MapReduce.ipynb    # 분산 병렬 처리: Dask & MapReduce 파이프라인 구축 
-├── Accelerating_Data_Engineering_Pipelines.pdf # DLI 워크숍 핵심 이론 및 가이드라인 
 ├── data/                         # 벤치마킹 및 실습용 데이터셋
 │   ├── sample_json.txt           # NOAA Tides & Currents API 원본 데이터 
 │   ├── sample_data.csv           # 시계열 수위 데이터 (Row-based) 
 │   ├── sample_data.parquet       # 칼럼 기반 최적화 데이터 (Columnar) 
 │   └── numbers.csv/parquet       # 7500x7500 고차원 벤치마킹 데이터셋 
 └── images/                       # 시스템 아키텍처 및 DAG 시각화 이미지
+```
 
 ### 1. 처리 엔진 및 라이브러리 비교 (Engine Comparison)
 | 구분 | Pandas | RAPIDS cuDF | Dask / dask_cudf |
